@@ -8,8 +8,12 @@ namespace SimpleRESTService.Manager
 {
     public class BooksManager
     {
-        private static readonly List<Book> bookList = new List<Book>();
+        private static readonly List<Book> bookList = new List<Book>()
+        {
+            new Book(){Author = "Pedro", Isbn = "01010101", PageNumber = 800, Title = "Nice"}
+        };
 
+        
 
         public List<Book> GetAll(string substring)
         {
