@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BookClassLibrary;
+using SimpleRESTService.Manager;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,36 +14,41 @@ namespace SimpleRESTService.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
+        private readonly BooksManager _manager = new BooksManager();
+
         // GET: api/<BooksController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Book> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _manager.GetAll(null);
         }
 
-        // GET api/<BooksController>/5
+        // GET api/<BooksController>/BookName
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IEnumerable<Book> Get(string substring)
         {
-            return "value";
+            return _manager.GetAll(substring);
         }
 
         // POST api/<BooksController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public Book Post([FromBody] Book value)
         {
+            return _manager.Add(value);
         }
 
         // PUT api/<BooksController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("{isbn}")]
+        public Book Put(string isbn, [FromBody] Book newBook)
         {
+            return _manager.Update(isbn, newBook);
         }
 
         // DELETE api/<BooksController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{isbn}")]
+        public Book Delete(string isbn)
         {
+            return _manager.Delete(isbn);
         }
     }
 }
