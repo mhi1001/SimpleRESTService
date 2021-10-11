@@ -57,6 +57,7 @@ namespace SimpleRESTService.Manager
             book.Title = update.Title;
             book.PageNumber = update.PageNumber;
             return book;
+
         }
 
     }
