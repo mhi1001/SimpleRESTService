@@ -56,7 +56,7 @@ namespace SimpleRESTService.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
-        public ActionResult<EventBookmark> Post([FromBody] Book value)
+        public ActionResult<Book> Post([FromBody] Book value)
         {
             Book book = _manager.Add(value);
             if (book == null)
